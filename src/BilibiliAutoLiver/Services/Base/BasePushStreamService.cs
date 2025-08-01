@@ -376,7 +376,7 @@ namespace BilibiliAutoLiver.Services.Base
         /// <returns></returns>
         protected async Task CheckNetwork(CancellationTokenSource tokenSource)
         {
-            while (!await NetworkUtil.Ping() && !tokenSource.IsCancellationRequested)
+            while (await NetworkUtil.Ping() && !tokenSource.IsCancellationRequested)
             {
                 _logger.LogWarning($"网络连接已断开，将在10秒后重新检查网络连接...");
                 await Task.Delay(10000, tokenSource.Token);
